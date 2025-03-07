@@ -1,0 +1,3 @@
+comando no terminal do vs code agora que o arquivo tá dividido:
+1 - gcc -Wall -Wextra -g3 fogefoge.c mapa.c -o fogefoge.exe
+2 - ./fogefoge.exe
