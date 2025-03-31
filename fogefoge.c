@@ -10,12 +10,17 @@ int acabou() {
     return 0; // Altere esta condição de saída conforme a lógica do jogo
 }
 
-void mover(char direcao) {
+int ehdirecao(char direcao){
     // validar entrada da usuario
-    if(direcao != 'a' &&
-        direcao != 'w' &&
-        direcao != 's' &&
-        direcao != 'd') {
+    return direcao == 'a' ||
+        direcao == 'w' ||
+        direcao == 's' ||
+        direcao == 'd';
+}
+
+void mover(char direcao) {
+    
+    if(!ehdirecao(direcao)) {
             return; // mata a função void
     }
 
@@ -42,20 +47,22 @@ void mover(char direcao) {
             break;
     }
 
-    if(proximo_x >= m.linhas){
+    // saber se esta no limite do mapa
+    if (!ehvalida(&m, proximo_x, proximo_y)){
         return;
     }
-    if (proximo_y >= m.colunas){
+    if (!ehvazia(&m, proximo_x, proximo_y)){
         return;
     }
-    if (m.matriz[proximo_x][proximo_y] != '.'){
-        return;
-    }
-    m.matriz[proximo_x][proximo_y] = '@';
-    // marca a posição antiga como vazio
-    m.matriz[heroi.x][heroi.y] = '.';
+
+    andanomapa(&m, heroi.x, heroi.y, proximo_x, proximo_y);
     heroi.x = proximo_x;
     heroi.y = proximo_y;
+    // m.matriz[proximo_x][proximo_y] = '@';
+    // // marca a posição antiga como vazio
+    // m.matriz[heroi.x][heroi.y] = '.';
+    // heroi.x = proximo_x;
+    // heroi.y = proximo_y;
 }
 
 int main() {
@@ -66,11 +73,11 @@ int main() {
         imprimirmapa(&m);
         char comando;
         printf("Informe o proximo comando:\n");
-        scanf(" %c", &comando); // Recebe o comando do usuário
-        mover(comando); // Move o herói conforme o comando
+        scanf("%c", &comando);
+        mover(comando);
     } while (!acabou());
 
-    liberarmapa(&m); // Libera a memória após o jogo terminar
+    liberarmapa(&m); // libera a memória após o jogo terminar
 
     return 0;
 }

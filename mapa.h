@@ -13,12 +13,13 @@ typedef struct posicao
     int y;
 } POSICAO;
 
-
-
 void liberarmapa(MAPA* m);
 void lermapa(MAPA* m);
 void alocarmemoriamapa(MAPA* m);
 void imprimirmapa(MAPA* m);
 void encontrarmapa(MAPA* m, POSICAO* p, char c);
-
+int ehvalida(MAPA* m, int x, int y );
+int ehvazia(MAPA* m, int x, int y);
+void andanomapa(MAPA *m, int x_origem, 
+    int y_origem, int x_destino, int y_destino);
 #endif
