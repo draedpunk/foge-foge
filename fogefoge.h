@@ -1,5 +1,10 @@
 #ifndef FOFEFOGE_H
 #define FOFEFOGE_H
+#define CIMA 'w'
+#define BAIXO 's'
+#define DIREITA 'd'
+#define ESQUERDA 'a'
+
 
 #include "mapa.h"
 

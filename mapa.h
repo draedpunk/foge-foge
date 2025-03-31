@@ -1,5 +1,9 @@
 #ifndef MAPA_H
 #define MAPA_H
+#define HEROI '@'
+#define VAZIO '.'
+#define PAREDE_VERTICAL '|'
+#define PAREDE_HORIZONTAL '-'
 
 typedef struct mapa {
     char** matriz;

@@ -30,19 +30,19 @@ void mover(char direcao) {
     // Movimentando o herói
     switch (direcao) {
 
-        case 'a': // Esquerda
+        case ESQUERDA: // Esquerda A
             proximo_y--;
             break;
     
-        case 'w': // Cima
+        case CIMA: // Cima W
             proximo_x--;
             break;
 
-        case 's': // Baixo
+        case BAIXO: // Baixo S
             proximo_x++;
             break;
 
-        case 'd': // Direita
+        case DIREITA: // Direita D
             proximo_y++;
             break;
     }
@@ -67,7 +67,7 @@ void mover(char direcao) {
 
 int main() {
     lermapa(&m);
-    encontrarmapa(&m, &heroi, '@');
+    encontrarmapa(&m, &heroi, HEROI);
 
     do {
         imprimirmapa(&m);
