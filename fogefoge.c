@@ -11,31 +11,51 @@ int acabou() {
 }
 
 void mover(char direcao) {
-    // Marca a posição antiga como vazio
-    m.matriz[heroi.x][heroi.y] = '.';
+    // validar entrada da usuario
+    if(direcao != 'a' &&
+        direcao != 'w' &&
+        direcao != 's' &&
+        direcao != 'd') {
+            return; // mata a função void
+    }
+
+    int proximo_x = heroi.x;
+    int proximo_y = heroi.y;
     
     // Movimentando o herói
     switch (direcao) {
+
         case 'a': // Esquerda
-            if (heroi.y > 0) m.matriz[heroi.x][heroi.y-1] = '@'; // Verifica se está dentro dos limites
-            heroi.y--;
+            proximo_y--;
             break;
     
         case 'w': // Cima
-            if (heroi.x > 0) m.matriz[heroi.x-1][heroi.y] = '@'; // Verifica se está dentro dos limites
-            heroi.x--;
+            proximo_x--;
             break;
 
         case 's': // Baixo
-            if (heroi.x < m.linhas - 1) m.matriz[heroi.x+1][heroi.y] = '@'; // Verifica se está dentro dos limites
-            heroi.x++;
+            proximo_x++;
             break;
 
         case 'd': // Direita
-            if (heroi.y < m.colunas - 1) m.matriz[heroi.x][heroi.y+1] = '@'; // Verifica se está dentro dos limites
-            heroi.y++;
+            proximo_y++;
             break;
     }
+
+    if(proximo_x >= m.linhas){
+        return;
+    }
+    if (proximo_y >= m.colunas){
+        return;
+    }
+    if (m.matriz[proximo_x][proximo_y] != '.'){
+        return;
+    }
+    m.matriz[proximo_x][proximo_y] = '@';
+    // marca a posição antiga como vazio
+    m.matriz[heroi.x][heroi.y] = '.';
+    heroi.x = proximo_x;
+    heroi.y = proximo_y;
 }
 
 int main() {
