@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 #define HEROI '@'
+#define FANTASMA 'F'
 #define VAZIO '.'
 #define PAREDE_VERTICAL '|'
 #define PAREDE_HORIZONTAL '-'
@@ -26,4 +27,5 @@ int ehvalida(MAPA* m, int x, int y );
 int ehvazia(MAPA* m, int x, int y);
 void andanomapa(MAPA *m, int x_origem, 
     int y_origem, int x_destino, int y_destino);
+    void copiamapa(MAPA* destino, MAPA* origem);
 #endif

@@ -3,11 +3,29 @@
 #include "fogefoge.h"
 #include "mapa.h"
 
-MAPA m;  // Definição da variável global, deve ser feita apenas aqui.
+MAPA m; 
 POSICAO heroi;
 
+void fantasmas(){
+    MAPA copia;
+    copiamapa(&copia, &m);
+
+    // o loop manda o fantasma pra direita caso ele seja encontrado
+    for (int i = 0; i < m.linhas; i++){
+        for (int j = 0; j < m.colunas; j++){
+            if (copia.matriz[i][j]== FANTASMA){
+                if (ehvalida(&m, i, j+1) && ehvazia(&m, i, j+1)) {
+                    andanomapa(&m,i, j, i, j+1);
+                }
+            }
+        }
+    }
+
+    liberarmapa(&copia);
+}
+
 int acabou() {
-    return 0; // Altere esta condição de saída conforme a lógica do jogo
+    return 0;
 }
 
 int ehdirecao(char direcao){
@@ -58,24 +76,32 @@ void mover(char direcao) {
     andanomapa(&m, heroi.x, heroi.y, proximo_x, proximo_y);
     heroi.x = proximo_x;
     heroi.y = proximo_y;
-    // m.matriz[proximo_x][proximo_y] = '@';
-    // // marca a posição antiga como vazio
-    // m.matriz[heroi.x][heroi.y] = '.';
-    // heroi.x = proximo_x;
-    // heroi.y = proximo_y;
 }
 
 int main() {
     lermapa(&m);
     encontrarmapa(&m, &heroi, HEROI);
+    imprimirmapa(&m);
 
+    // do {
+    //     imprimirmapa(&m);
+    //     char comando;
+    //     printf("Informe o proximo comando:\n");
+    //     scanf("%c", &comando);
+    //     mover(comando);
+    //     fantasmas();
+
+    // } while (!acabou());
     do {
-        imprimirmapa(&m);
         char comando;
         printf("Informe o proximo comando:\n");
-        scanf("%c", &comando);
-        mover(comando);
+        scanf(" %c", &comando); // Lê o comando
+        mover(comando); // Move o herói
+        fantasmas(); // Move os fantasmas
+        imprimirmapa(&m); // Agora imprimimos o mapa após todas as movimentações
+    
     } while (!acabou());
+    
 
     liberarmapa(&m); // libera a memória após o jogo terminar
 
